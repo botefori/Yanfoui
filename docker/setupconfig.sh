@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-ls ../app
+ls /

@@ -1,6 +1,7 @@
 APP_NAME ?= yanfoui
 DOCKER_NETWORK ?= yanfoui
 
+#docker exec -it yafoui-app bash
 
 build:
 	docker-compose build --no-cache
