@@ -1,0 +1,11 @@
+version: '2'
+services:
+    app:
+        build: ./docker
+        image: yanfoui-app
+        container_name: yafoui-app
+        volumes:
+           - ./app ./
+        environment:
+            VIRTUAL_HOST: app-yanfoui.docker
+            DOMAIN_NAME: app-yanfoui.docker
