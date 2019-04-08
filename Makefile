@@ -1,15 +1,23 @@
 APP_NAME ?= yanfoui
 DOCKER_NETWORK ?= yanfoui
 
+#docker exec -it yafoui-app bash
 
 build:
 	docker-compose build --no-cache
 	
 up:
 	docker-compose up -d
+	@make nginxup
 
-fup:
-	docker-compose up -d --force-recreate
+nginxup:
+	docker-compose exec -d app service nginx start
+
+
+
+
+bash:
+	docker exec -it yafoui-app bash
 
 down:
 	docker-compose down
