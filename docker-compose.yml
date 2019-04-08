@@ -1,5 +1,9 @@
 version: '2'
 services:
+    proxy:
+        image: jwilder/nginx-proxy
+        volumes:
+            - "/var/run/docker.sock:/tmp/docker.sock:ro"
     app:
         build: .
         image: yanfoui-app
