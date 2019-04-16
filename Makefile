@@ -2,6 +2,7 @@ APP_NAME ?= yanfoui
 DOCKER_NETWORK ?= yanfoui
 
 #docker exec -it yafoui-app bash
+#mysql -h database -u root -proot yanfoui_api
 
 build:
 	docker-compose build --no-cache

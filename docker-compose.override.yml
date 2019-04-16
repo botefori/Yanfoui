@@ -2,8 +2,13 @@ version: '2'
 services:
   proxy:
     ports:
-    - 82:82
+    - 80:80
     - 444:444
   app:
     ports:
     - 8080:81
+  database:
+    volumes:
+    -  "database:/var/lib/mysql"
+volumes:
+  database:

@@ -20,7 +20,9 @@ RUN apt-get update \
     && apt-get install -y \
         nginx \
         vim \
-        curl
+        curl \
+        iputils-ping \
+        mysql-client
 
 COPY --from=build-env /app/app/out .
 COPY docker/default /etc/nginx/sites-enabled/

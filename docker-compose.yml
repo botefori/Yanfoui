@@ -8,8 +8,25 @@ services:
         build: .
         image: yanfoui-app
         container_name: yafoui-app
+        depends_on:
+           - database
         volumes:
            - ./app:/var/app
         environment:
             VIRTUAL_HOST: app-yanfoui.docker
             DOMAIN_NAME: app-yanfoui.docker
+    database:
+        image: mariadb:10.1
+        environment:
+             MYSQL_ROOT_PASSWORD: root
+             MYSQL_DATABASE: yanfoui_api
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            PMA_HOST: database
+            VIRTUAL_HOST: phpmyadmin.yanfoui.docker
+            DOMAIN_NAME: phpmyadmin.yanfoui.docker
+        depends_on:
+           - database
