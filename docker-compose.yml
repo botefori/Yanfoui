@@ -8,6 +8,8 @@ services:
         build: .
         image: yanfoui-app
         container_name: yafoui-app
+        depends_on:
+           - database
         volumes:
            - ./app:/var/app
         environment:
