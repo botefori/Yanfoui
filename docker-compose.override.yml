@@ -7,3 +7,9 @@ services:
   app:
     ports:
     - 8080:81
+  database:
+    volumes:
+    -  "database:/var/lib/mysql"
+
+volumes:
+  database:
