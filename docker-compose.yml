@@ -1,25 +1,46 @@
-version: '2'
+version: '3.3'
 services:
     proxy:
         image: jwilder/nginx-proxy
         volumes:
             - "/var/run/docker.sock:/tmp/docker.sock:ro"
-    app:
-        build: .
-        image: yanfoui-app
-        container_name: yafoui-app
+ #   app:
+ #       build:
+ #         context: .
+ #         dockerfile: ./docker/runtime/Dockerfile
+ #       image: yanfoui-app
+ #       container_name: yanfoui-app
+ #       depends_on:
+ #          - database
+ #       volumes:
+ #          - ./app:/var/app
+ #       environment:
+ #           VIRTUAL_HOST: app-yanfoui.docker
+ #           DOMAIN_NAME: app-yanfoui.docker
+ #           VIRTUAL_PORT: 5000
+ #       ports:
+ #           - 82:5000 
+    app-dev:
+        build:
+          context: .
+          dockerfile: ./docker/developpement/Dockerfile
+        image: yanfoui-app-dev
+        container_name: yanfoui-app-dev
         depends_on:
            - database
         volumes:
-           - ./app:/var/app
+           - ./app:/app
         environment:
-            VIRTUAL_HOST: app-yanfoui.docker
-            DOMAIN_NAME: app-yanfoui.docker
+            VIRTUAL_HOST: app-yanfoui-dev.docker
+            DOMAIN_NAME: app-yanfoui-dev.docker
+            VIRTUAL_PORT: 5000
+        ports:
+            - 8080:5000
     database:
         image: mariadb:10.1
         environment:
              MYSQL_ROOT_PASSWORD: root
-             MYSQL_DATABASE: yanfoui_api
+             MYSQL_DATABASE: yanfoui-api
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin

@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using app.Models;
+
+using Microsoft.Extensions.DependencyInjection;
 namespace app.Data
 {
    public class AppContext:DbContext

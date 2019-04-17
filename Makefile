@@ -12,16 +12,19 @@ up:
 	@make nginxup
 
 nginxup:
-	docker-compose exec -d app service nginx start
+	docker-compose exec -d app-dev service nginx start
 
-
-
-
+	
+	
 bash:
-	docker exec -it yafoui-app bash
+	docker exec -it yanfoui-app-dev bash
+
+watch:
+		docker-compose run --rm -v "${CURDIR}/docker/developpement/wait-mysql.sh:/wait.sh" app-dev /wait.sh
+		docker run --rm -it -v "$(PWD)/app:/app/" -e ASPNETCORE_ENVIRONMENT=Development -w /app yanfoui-app-dev dotnet watch run --urls="http://0.0.0.0:5000"
 
 down:
-	docker-compose down
+	docker-compose down --remove-orphans
 
 clear:
 	docker-compose down -v
