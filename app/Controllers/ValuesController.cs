@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace app.Controllers
 {
     [Produces("application/json")]
-    [Route("values")]
+    [Route("api/values")]
     [ApiController]
     public class ValuesController : ControllerBase
     {

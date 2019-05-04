@@ -39,8 +39,8 @@ namespace app
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContextPool<DbContext>(
-                options => options.UseMySql("Server=localhost;Database=ef;User=root;Password=123456;", // replace with your Connection String
+            services.AddDbContextPool<app.Data.AppContext>(
+                options => options.UseMySql(Configuration.GetConnectionString("YanfouiApi"), // replace with your Connection String
                     mySqlOptions =>
                     {
                         mySqlOptions.ServerVersion(new Version(10, 1, 36), ServerType.MariaDb); // replace with your Server Version and Type
