@@ -15,16 +15,18 @@ namespace app
         public static void Main(string[] args)
         {
             var host = CreateWebHostBuilder(args).Build();
-            
-          try{
-                using(var context = (app.Data.AppContext)host.Services.GetService(typeof(app.Data.AppContext))){
-                app.Data.DbInitializer.Initialize(context);
-                context.Database.EnsureCreated();
 
-          }
-          }catch(Exception ex){
-            
-          }
+            try
+            {
+                using (var context = (app.Data.AppContext)host.Services.GetService(typeof(app.Data.AppContext)))
+                {
+                    app.Data.DbInitializer.Initialize(context);
+                    context.Database.EnsureCreated();
+                }
+            }
+            catch (Exception)
+            {
+            }
 
             host.Run();
         }

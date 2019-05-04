@@ -40,7 +40,7 @@ namespace app
             });
 
             services.AddDbContextPool<app.Data.AppContext>(
-                options => options.UseMySql("Server=database;Database=yanfoui-api;User=root;Password=root;", // replace with your Connection String
+                options => options.UseMySql(Configuration.GetConnectionString("YanfouiApi"), // replace with your Connection String
                     mySqlOptions =>
                     {
                         mySqlOptions.ServerVersion(new Version(10, 1, 36), ServerType.MariaDb); // replace with your Server Version and Type
