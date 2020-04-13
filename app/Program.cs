@@ -10,6 +10,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using app.Data;
+using Microsoft.AspNetCore.Identity;
+using app.Models;
 
 namespace app
 {
@@ -31,10 +34,13 @@ namespace app
                     var services = scope.ServiceProvider;
 
                     try{
-                        var context = (app.Data.AppContext)services.GetRequiredService<app.Data.AppContext>();
-                        app.Data.DbInitializer.Initialize(context);
+                        var context = services.GetRequiredService<AppDbContext>();
                         context.Database.Migrate();
-                    
+
+                        var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+                        var roleManager = services.GetRequiredService<RoleManager<ApplicationRole>>();
+                        app.Data.DbInitializer.Initialize(context, userManager, roleManager);
+                        
                     }catch(Exception ex)
                     {
                       ILogger logger = (ILogger)host.Services.GetService(typeof(ILogger<Program>));
